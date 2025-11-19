@@ -44,7 +44,18 @@
                 btn.classList.add('bg-white', 'text-gray-600', 'border', 'border-gray-200');
             });
             
-            // 2. Filter grid items
+            // 2. Handle layout pinning
+            // When filtering, we want to remove the forced column positioning so items flow naturally
+            const pinnedItems = document.querySelectorAll('.js-pinned');
+            pinnedItems.forEach(item => {
+                if (category === 'all') {
+                    item.classList.add('lg:col-start-4');
+                } else {
+                    item.classList.remove('lg:col-start-4');
+                }
+            });
+            
+            // 3. Filter grid items
             const x = document.getElementsByClassName("hub-card");
             if (category == "all") category = "";
             for (let i = 0; i < x.length; i++) {
@@ -222,7 +233,8 @@
             </div>
 
             <!-- 2. Podcast Integration (Forced to Right Column) -> category: podcasts -->
-            <div data-category="podcasts" class="hub-card bg-gray-900 rounded-2xl p-6 col-span-1 md:col-span-1 lg:col-start-4 row-span-2 flex flex-col justify-between shadow-card relative overflow-hidden">
+            <!-- Added 'js-pinned' class to target this element in JS -->
+            <div data-category="podcasts" class="hub-card js-pinned bg-gray-900 rounded-2xl p-6 col-span-1 md:col-span-1 lg:col-start-4 row-span-2 flex flex-col justify-between shadow-card relative overflow-hidden">
                 <!-- Decorative circles -->
                 <div class="absolute -top-10 -right-10 w-40 h-40 bg-gray-800 rounded-full opacity-50"></div>
                 
@@ -367,7 +379,8 @@
             </div>
 
             <!-- 8. Upcoming Event (Forced to Right Column) -> category: webinars -->
-            <div data-category="webinars" class="hub-card bg-zen-black rounded-2xl p-6 col-span-1 lg:col-start-4 text-white flex flex-col items-center justify-center text-center shadow-card">
+            <!-- Added 'js-pinned' class to target this element in JS -->
+            <div data-category="webinars" class="hub-card js-pinned bg-zen-black rounded-2xl p-6 col-span-1 lg:col-start-4 text-white flex flex-col items-center justify-center text-center shadow-card">
                 <i class="fa-regular fa-calendar-check text-4xl text-zen-orange mb-3"></i>
                 <h3 class="font-bold text-lg mb-1">WPPI 2025</h3>
                 <p class="text-sm text-gray-400 mb-4">Join us at the booth!</p>

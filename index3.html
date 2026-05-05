@@ -1,0 +1,923 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Photography Tips & Articles | Zenfolio Blog Wireframe</title>
+    
+    <!-- Google Fonts: Inter for clean structural feel -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Lucide Icons for lightweight SVG icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <style>
+        /* CSS Variables / Design Tokens (Grayscale for Wireframe) */
+        :root {
+            --zf-black: #111827;
+            --zf-dark-gray: #4B5563;
+            --zf-gray: #6B7280;
+            --zf-light-gray: #D1D5DB;
+            --zf-off-white: #F3F4F6;
+            --zf-white: #FFFFFF;
+            
+            /* Structural Accent - Replaced orange with dark gray */
+            --zf-accent: #374151; 
+            --zf-accent-hover: #111827;
+            
+            --wire-img-bg: #E5E7EB;
+            --wire-img-border: #9CA3AF;
+            
+            --font-main: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            
+            --radius-md: 8px;
+            --radius-lg: 12px;
+            --radius-pill: 9999px;
+            
+            --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+            --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+            
+            --transition: all 0.2s ease;
+        }
+
+        /* Reset & Base */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: var(--font-main);
+            color: var(--zf-dark-gray);
+            background-color: var(--zf-white);
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+            transition: var(--transition);
+        }
+
+        ul {
+            list-style: none;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        /* Typography */
+        h1, h2, h3, h4 {
+            color: var(--zf-black);
+            line-height: 1.2;
+            font-weight: 600;
+            letter-spacing: -0.02em;
+        }
+
+        .text-label {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            font-weight: 600;
+            color: var(--zf-gray);
+        }
+
+        /* Top Navigation */
+        .site-header {
+            border-bottom: 2px solid var(--zf-off-white);
+            background: var(--zf-white);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 72px;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--zf-black);
+            letter-spacing: -0.05em;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .main-nav {
+            display: none;
+        }
+
+        .main-nav ul {
+            display: flex;
+            gap: 32px;
+        }
+
+        .main-nav a {
+            font-size: 0.9rem;
+            font-weight: 500;
+            color: var(--zf-dark-gray);
+        }
+
+        .main-nav a:hover {
+            color: var(--zf-black);
+        }
+
+        .nav-actions {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .nav-actions a.login {
+            font-size: 0.9rem;
+            font-weight: 500;
+            display: none;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 10px 20px;
+            border-radius: var(--radius-md); /* Reduced pill radius for wireframe */
+            font-size: 0.9rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            border: 2px solid transparent;
+        }
+
+        .btn-primary {
+            background-color: var(--zf-accent);
+            color: var(--zf-white);
+        }
+
+        .btn-primary:hover {
+            background-color: var(--zf-accent-hover);
+        }
+
+        .btn-outline {
+            background-color: transparent;
+            border-color: var(--zf-light-gray);
+            color: var(--zf-black);
+        }
+
+        .btn-outline:hover {
+            border-color: var(--zf-dark-gray);
+            background-color: var(--zf-off-white);
+        }
+
+        /* Blog Header & Category Nav */
+        .blog-header {
+            padding: 64px 0 32px;
+            text-align: center;
+        }
+
+        .blog-header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 32px;
+            color: var(--zf-black);
+        }
+
+        .category-nav {
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+
+        .cat-pill {
+            padding: 8px 16px;
+            border-radius: var(--radius-md);
+            background-color: var(--zf-white);
+            color: var(--zf-dark-gray);
+            font-size: 0.875rem;
+            font-weight: 500;
+            border: 2px solid var(--zf-light-gray);
+        }
+
+        .cat-pill.active, .cat-pill:hover {
+            background-color: var(--zf-accent);
+            color: var(--zf-white);
+            border-color: var(--zf-accent);
+        }
+
+        /* Hero Section */
+        .hero-section {
+            padding: 32px 0 64px;
+        }
+
+        .hero-article {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 32px;
+            align-items: center;
+        }
+
+        /* Wireframe Image Placeholders */
+        .hero-image-wrap, .card-image-wrap {
+            border-radius: var(--radius-md);
+            overflow: hidden;
+            position: relative;
+            background-color: var(--zf-white);
+        }
+
+        .hero-image-wrap {
+            aspect-ratio: 16/9;
+        }
+
+        .card-image-wrap {
+            aspect-ratio: 3/2;
+        }
+        
+        .card-large .card-image-wrap {
+            aspect-ratio: 16/9;
+        }
+
+        .wire-img {
+            width: 100%;
+            height: 100%;
+            background-color: var(--wire-img-bg);
+            border: 2px dashed var(--wire-img-border);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--zf-gray);
+            transition: var(--transition);
+        }
+
+        .hero-article:hover .wire-img,
+        .card:hover .wire-img {
+            background-color: var(--zf-light-gray);
+        }
+
+        .hero-content {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        .hero-title {
+            font-size: 2rem;
+        }
+
+        .hero-excerpt {
+            font-size: 1.1rem;
+            color: var(--zf-gray);
+        }
+
+        .article-meta {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 0.875rem;
+            color: var(--zf-gray);
+        }
+
+        /* Latest Articles / Standard Grid */
+        .section-title {
+            font-size: 1.5rem;
+            margin-bottom: 32px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            border-bottom: 2px solid var(--zf-off-white);
+            padding-bottom: 12px;
+        }
+
+        .article-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 32px;
+            margin-bottom: 64px;
+        }
+
+        .card {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        .card-title {
+            font-size: 1.25rem;
+        }
+
+        .card:hover .card-title {
+            color: var(--zf-black);
+            text-decoration: underline;
+            text-underline-offset: 4px;
+            decoration-thickness: 2px;
+            text-decoration-color: var(--zf-black);
+        }
+
+        /* Wireframe Type Badges */
+        .type-badge {
+            position: absolute;
+            top: 12px;
+            right: 12px;
+            background: var(--zf-white);
+            padding: 6px 12px;
+            border-radius: var(--radius-md);
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            color: var(--zf-dark-gray);
+            border: 2px solid var(--zf-light-gray);
+            z-index: 10;
+        }
+
+        .type-badge i {
+            width: 14px;
+            height: 14px;
+        }
+
+        /* Integrated CTA Callout (Structural) */
+        .cta-callout {
+            background-color: var(--zf-off-white);
+            border-radius: var(--radius-lg);
+            padding: 64px 32px;
+            text-align: center;
+            margin: 64px 0;
+            border: 2px dashed var(--zf-light-gray);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 24px;
+        }
+
+        .cta-callout h2 {
+            font-size: 2rem;
+            max-width: 600px;
+        }
+
+        .cta-callout p {
+            font-size: 1.1rem;
+            color: var(--zf-gray);
+            max-width: 500px;
+        }
+
+        /* Mixed Layout Grid */
+        .mixed-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 32px;
+            margin-bottom: 64px;
+        }
+
+        .card-large {
+            display: flex;
+            flex-direction: column;
+            gap: 24px;
+        }
+
+        .card-large .card-title {
+            font-size: 1.5rem;
+        }
+
+        /* Grid Transitions for AJAX simulation */
+        .grid-loading {
+            opacity: 0.3;
+            pointer-events: none;
+            filter: blur(2px);
+            transition: all 0.3s ease;
+        }
+
+        .article-grid {
+            transition: all 0.3s ease;
+        }
+
+        /* Load More */
+        .load-more-wrap {
+            text-align: center;
+            margin: 32px 0 96px;
+        }
+
+        /* Footer */
+        .site-footer {
+            background-color: var(--zf-off-white);
+            color: var(--zf-dark-gray);
+            padding: 64px 0 32px;
+            border-top: 2px solid var(--zf-light-gray);
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 48px;
+            margin-bottom: 64px;
+        }
+
+        .footer-col h4 {
+            color: var(--zf-black);
+            margin-bottom: 24px;
+            font-size: 0.9rem;
+            font-weight: 700;
+        }
+
+        .footer-col ul {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .footer-col a:hover {
+            color: var(--zf-black);
+            text-decoration: underline;
+        }
+
+        .footer-bottom {
+            border-top: 2px solid var(--zf-light-gray);
+            padding-top: 32px;
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.875rem;
+        }
+
+        /* Responsive Breakpoints */
+        @media (min-width: 768px) {
+            .nav-actions a.login, .main-nav { display: block; }
+            .hero-article { grid-template-columns: 1.2fr 1fr; }
+            .article-grid { grid-template-columns: repeat(2, 1fr); }
+            .footer-grid { grid-template-columns: repeat(4, 1fr); }
+            .mixed-grid { grid-template-columns: repeat(2, 1fr); }
+        }
+
+        @media (min-width: 1024px) {
+            .article-grid { grid-template-columns: repeat(3, 1fr); }
+            .mixed-grid { grid-template-columns: repeat(3, 1fr); }
+            
+            /* Create a masonry/magazine feel for the mixed grid */
+            .mixed-grid .card-large {
+                grid-column: span 2;
+                grid-row: span 2;
+            }
+            .mixed-grid .card-large .card-title { font-size: 1.75rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header -->
+    <header class="site-header">
+        <div class="container nav-container">
+            <a href="#" class="logo"><i data-lucide="layout-template"></i> zenfolio</a>
+            
+            <nav class="main-nav">
+                <ul>
+                    <li><a href="#">Features</a></li>
+                    <li><a href="#">Built For</a></li>
+                    <li><a href="#">Templates</a></li>
+                    <li><a href="#">Pricing</a></li>
+                    <li><a href="#">Resources</a></li>
+                </ul>
+            </nav>
+
+            <div class="nav-actions">
+                <a href="#" class="login">Log In</a>
+                <a href="#" class="btn btn-primary">Start Free Trial</a>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <!-- Blog Sub-header & Navigation -->
+        <section class="container blog-header">
+            <h1>Photography Tips & Articles</h1>
+            <nav class="category-nav">
+                <a href="#" class="cat-pill active">All</a>
+                <a href="#" class="cat-pill">Business & Management</a>
+                <a href="#" class="cat-pill">Tips & Techniques</a>
+                <a href="#" class="cat-pill">Product News</a>
+                <a href="#" class="cat-pill">Community</a>
+            </nav>
+        </section>
+
+        <!-- Featured Hero Article -->
+        <section class="container hero-section" id="hero-section">
+            <article class="hero-article">
+                <a href="#" class="hero-image-wrap">
+                    <div class="wire-img"><i data-lucide="image" style="width: 48px; height: 48px; opacity: 0.5;"></i></div>
+                </a>
+                <div class="hero-content">
+                    <span class="text-label">Business & Management</span>
+                    <h2 class="hero-title"><a href="#">Ultimate Guide to Graduation Photos: Capture the Moment, Maximize Sales</a></h2>
+                    <p class="hero-excerpt">Discover proven techniques for capturing stunning senior portraits, streamlining client delivery through Zenfolio galleries, and boosting your end-of-season print revenue.</p>
+                    <div class="article-meta">
+                        <span>May 1st, 2026</span>
+                        <span>•</span>
+                        <span>8 min read</span>
+                    </div>
+                </div>
+            </article>
+        </section>
+
+        <!-- Latest Articles Feed -->
+        <section class="container">
+            <div class="section-title">
+                <h3>The Latest</h3>
+            </div>
+            
+            <div class="article-grid" id="latest-articles-grid">
+                <!-- Standard Article -->
+                <article class="card">
+                    <a href="#" class="card-image-wrap">
+                        <div class="wire-img"><i data-lucide="image" style="width: 32px; height: 32px; opacity: 0.5;"></i></div>
+                    </a>
+                    <span class="text-label">Product News</span>
+                    <h3 class="card-title"><a href="#">Meet Zia: Zenfolio's AI Assistant for Photographers</a></h3>
+                    <div class="article-meta">
+                        <span>Apr 27th, 2026</span>
+                        <span>•</span>
+                        <span>4 min read</span>
+                    </div>
+                </article>
+
+                <!-- Video Article -->
+                <article class="card">
+                    <a href="#" class="card-image-wrap">
+                        <div class="type-badge">
+                            <i data-lucide="play-circle"></i> Video
+                        </div>
+                        <div class="wire-img"><i data-lucide="video" style="width: 32px; height: 32px; opacity: 0.5;"></i></div>
+                    </a>
+                    <span class="text-label">Tips & Techniques</span>
+                    <h3 class="card-title"><a href="#">Smarter Selling Tools: Setting Up Automated Pricing</a></h3>
+                    <div class="article-meta">
+                        <span>Apr 16th, 2026</span>
+                        <span>•</span>
+                        <span>12 min watch</span>
+                    </div>
+                </article>
+
+                <!-- Podcast Article -->
+                <article class="card">
+                    <a href="#" class="card-image-wrap">
+                        <div class="type-badge">
+                            <i data-lucide="headphones"></i> Podcast
+                        </div>
+                        <div class="wire-img"><i data-lucide="mic" style="width: 32px; height: 32px; opacity: 0.5;"></i></div>
+                    </a>
+                    <span class="text-label">Community & Partners</span>
+                    <h3 class="card-title"><a href="#">State of the Photography Industry: 2026 Survey Results</a></h3>
+                    <div class="article-meta">
+                        <span>Apr 10th, 2026</span>
+                        <span>•</span>
+                        <span>45 min listen</span>
+                    </div>
+                </article>
+
+                <!-- Standard Article (Row 2) -->
+                <article class="card">
+                    <a href="#" class="card-image-wrap">
+                        <div class="wire-img"><i data-lucide="image" style="width: 32px; height: 32px; opacity: 0.5;"></i></div>
+                    </a>
+                    <span class="text-label">Business & Management</span>
+                    <h3 class="card-title"><a href="#">5 Ways to Automate Your Client Workflows This Season</a></h3>
+                    <div class="article-meta">
+                        <span>Apr 8th, 2026</span>
+                        <span>•</span>
+                        <span>6 min read</span>
+                    </div>
+                </article>
+
+                <!-- Profile Article (Row 2) -->
+                <article class="card">
+                    <a href="#" class="card-image-wrap">
+                        <div class="type-badge">
+                            <i data-lucide="user"></i> Photographer Profile
+                        </div>
+                        <div class="wire-img"><i data-lucide="user-square" style="width: 32px; height: 32px; opacity: 0.5;"></i></div>
+                    </a>
+                    <span class="text-label">Community</span>
+                    <h3 class="card-title"><a href="#">Building a Portfolio That Attracts High-End Clients</a></h3>
+                    <div class="article-meta">
+                        <span>Apr 2nd, 2026</span>
+                        <span>•</span>
+                        <span>8 min read</span>
+                    </div>
+                </article>
+
+                <!-- Standard Article (Row 2) -->
+                <article class="card">
+                    <a href="#" class="card-image-wrap">
+                        <div class="wire-img"><i data-lucide="image" style="width: 32px; height: 32px; opacity: 0.5;"></i></div>
+                    </a>
+                    <span class="text-label">Tips & Techniques</span>
+                    <h3 class="card-title"><a href="#">How to Market and Sell Out Your Spring Mini-Sessions</a></h3>
+                    <div class="article-meta">
+                        <span>Mar 28th, 2026</span>
+                        <span>•</span>
+                        <span>5 min read</span>
+                    </div>
+                </article>
+            </div>
+        </section>
+
+        <!-- Mixed Layout Grid (Editor's Picks / More Reading) -->
+        <section class="container">
+            <div class="section-title">
+                <h3>Editor's Picks</h3>
+            </div>
+            
+            <div class="mixed-grid">
+                <!-- Large Featured Card -->
+                <article class="card card-large">
+                    <a href="#" class="card-image-wrap">
+                        <div class="type-badge">
+                            <i data-lucide="user"></i> Photographer Profile
+                        </div>
+                        <div class="wire-img"><i data-lucide="image" style="width: 48px; height: 48px; opacity: 0.5;"></i></div>
+                    </a>
+                    <div>
+                        <span class="text-label">Community</span>
+                        <h3 class="card-title"><a href="#">Wrangling the Wilds: How Jane Doe Captures Breathtaking Landscapes</a></h3>
+                        <p class="hero-excerpt" style="margin-top: 12px;">Jane shares her process for packing gear, finding unique perspectives, and leveraging her Zenfolio site to sell massive wall art to collectors.</p>
+                        <div class="article-meta" style="margin-top: 16px;">
+                            <span>Mar 20th, 2026</span>
+                            <span>•</span>
+                            <span>6 min read</span>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- Standard Article -->
+                <article class="card">
+                    <a href="#" class="card-image-wrap">
+                        <div class="wire-img"><i data-lucide="image" style="width: 32px; height: 32px; opacity: 0.5;"></i></div>
+                    </a>
+                    <span class="text-label">Tips & Techniques</span>
+                    <h3 class="card-title"><a href="#">Creative Maternity Photo Ideas to Celebrate Motherhood</a></h3>
+                    <div class="article-meta">
+                        <span>Apr 3rd, 2026</span>
+                        <span>•</span>
+                        <span>5 min read</span>
+                    </div>
+                </article>
+
+                <!-- Standard Article -->
+                <article class="card">
+                    <a href="#" class="card-image-wrap">
+                        <div class="wire-img"><i data-lucide="image" style="width: 32px; height: 32px; opacity: 0.5;"></i></div>
+                    </a>
+                    <span class="text-label">Business & Management</span>
+                    <h3 class="card-title"><a href="#">Protecting Your Business: A Guide to Image Security</a></h3>
+                    <div class="article-meta">
+                        <span>Mar 12th, 2026</span>
+                        <span>•</span>
+                        <span>7 min read</span>
+                    </div>
+                </article>
+            </div>
+            
+            <div class="load-more-wrap">
+                <button class="btn btn-outline" id="loadMoreBtn" style="padding: 12px 32px;">Load More Articles</button>
+            </div>
+        </section>
+
+        <!-- Bottom CTA Callout -->
+        <section class="container">
+            <div class="cta-callout">
+                <h2>Build a photography business that works as hard as you do.</h2>
+                <p>Create a stunning portfolio, deliver client galleries, and sell prints effortlessly—all from one platform. No coding required.</p>
+                <div style="display: flex; gap: 16px;">
+                    <a href="#" class="btn btn-primary">Start Your Free Trial</a>
+                    <a href="#" class="btn btn-outline">Explore Features</a>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="site-footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <h4>Product</h4>
+                    <ul>
+                        <li><a href="#">Website Builder</a></li>
+                        <li><a href="#">Client Galleries</a></li>
+                        <li><a href="#">E-commerce</a></li>
+                        <li><a href="#">Business Tools</a></li>
+                        <li><a href="#">Pricing</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Resources</h4>
+                    <ul>
+                        <li><a href="#">Blog</a></li>
+                        <li><a href="#">Support Center</a></li>
+                        <li><a href="#">Online Training</a></li>
+                        <li><a href="#">Photographer Guides</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Community</h4>
+                    <ul>
+                        <li><a href="#">Events</a></li>
+                        <li><a href="#">Find a Photographer</a></li>
+                        <li><a href="#">Affiliate Program</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Company</h4>
+                    <ul>
+                        <li><a href="#">About Us</a></li>
+                        <li><a href="#">Careers</a></li>
+                        <li><a href="#">Press</a></li>
+                        <li><a href="#">Contact</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 Zenfolio Inc. All rights reserved.</p>
+                <div style="display: flex; gap: 24px;">
+                    <a href="#">Terms</a>
+                    <a href="#">Privacy</a>
+                    <a href="#">Accessibility</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Initialize Icons & Basic Interaction -->
+    <script>
+        // Initialize Lucide icons
+        lucide.createIcons();
+
+        // --- Mock Data for AJAX Simulation (Wireframe Placeholders) ---
+        const wireImgPlaceholder = '<div class="wire-img"><i data-lucide="image" style="width: 32px; height: 32px; opacity: 0.5;"></i></div>';
+
+        const mockData = {
+            'All': `
+                <article class="card">
+                    <a href="#" class="card-image-wrap">${wireImgPlaceholder}</a>
+                    <span class="text-label">Product News</span>
+                    <h3 class="card-title"><a href="#">Meet Zia: Zenfolio's AI Assistant for Photographers</a></h3>
+                    <div class="article-meta"><span>Apr 27th, 2026</span><span>•</span><span>4 min read</span></div>
+                </article>
+                <article class="card">
+                    <a href="#" class="card-image-wrap">
+                        <div class="type-badge"><i data-lucide="play-circle"></i> Video</div>
+                        <div class="wire-img"><i data-lucide="video" style="width: 32px; height: 32px; opacity: 0.5;"></i></div>
+                    </a>
+                    <span class="text-label">Tips & Techniques</span>
+                    <h3 class="card-title"><a href="#">Smarter Selling Tools: Setting Up Automated Pricing</a></h3>
+                    <div class="article-meta"><span>Apr 16th, 2026</span><span>•</span><span>12 min watch</span></div>
+                </article>
+                <article class="card">
+                    <a href="#" class="card-image-wrap">
+                        <div class="type-badge"><i data-lucide="headphones"></i> Podcast</div>
+                        <div class="wire-img"><i data-lucide="mic" style="width: 32px; height: 32px; opacity: 0.5;"></i></div>
+                    </a>
+                    <span class="text-label">Community & Partners</span>
+                    <h3 class="card-title"><a href="#">State of the Photography Industry: 2026 Survey Results</a></h3>
+                    <div class="article-meta"><span>Apr 10th, 2026</span><span>•</span><span>45 min listen</span></div>
+                </article>
+                <article class="card">
+                    <a href="#" class="card-image-wrap">${wireImgPlaceholder}</a>
+                    <span class="text-label">Business & Management</span>
+                    <h3 class="card-title"><a href="#">5 Ways to Automate Your Client Workflows This Season</a></h3>
+                    <div class="article-meta"><span>Apr 8th, 2026</span><span>•</span><span>6 min read</span></div>
+                </article>
+                <article class="card">
+                    <a href="#" class="card-image-wrap">
+                        <div class="type-badge"><i data-lucide="user"></i> Photographer Profile</div>
+                        <div class="wire-img"><i data-lucide="user-square" style="width: 32px; height: 32px; opacity: 0.5;"></i></div>
+                    </a>
+                    <span class="text-label">Community</span>
+                    <h3 class="card-title"><a href="#">Building a Portfolio That Attracts High-End Clients</a></h3>
+                    <div class="article-meta"><span>Apr 2nd, 2026</span><span>•</span><span>8 min read</span></div>
+                </article>
+                <article class="card">
+                    <a href="#" class="card-image-wrap">${wireImgPlaceholder}</a>
+                    <span class="text-label">Tips & Techniques</span>
+                    <h3 class="card-title"><a href="#">How to Market and Sell Out Your Spring Mini-Sessions</a></h3>
+                    <div class="article-meta"><span>Mar 28th, 2026</span><span>•</span><span>5 min read</span></div>
+                </article>
+            `,
+            'Business & Management': `
+                <article class="card">
+                    <a href="#" class="card-image-wrap">${wireImgPlaceholder}</a>
+                    <span class="text-label">Business & Management</span>
+                    <h3 class="card-title"><a href="#">5 Pricing Mistakes Destroying Your Photography Profits</a></h3>
+                    <div class="article-meta"><span>May 4th, 2026</span><span>•</span><span>7 min read</span></div>
+                </article>
+                <article class="card">
+                    <a href="#" class="card-image-wrap">${wireImgPlaceholder}</a>
+                    <span class="text-label">Business & Management</span>
+                    <h3 class="card-title"><a href="#">Client Contracts: What Needs to be in Your 2026 Agreement</a></h3>
+                    <div class="article-meta"><span>Apr 21st, 2026</span><span>•</span><span>5 min read</span></div>
+                </article>
+            `,
+            'Tips & Techniques': `
+                <article class="card">
+                    <a href="#" class="card-image-wrap">
+                        <div class="type-badge"><i data-lucide="play-circle"></i> Video</div>
+                        <div class="wire-img"><i data-lucide="video" style="width: 32px; height: 32px; opacity: 0.5;"></i></div>
+                    </a>
+                    <span class="text-label">Tips & Techniques</span>
+                    <h3 class="card-title"><a href="#">One-Light Portrait Setups That Look Expensive</a></h3>
+                    <div class="article-meta"><span>May 2nd, 2026</span><span>•</span><span>15 min watch</span></div>
+                </article>
+            `,
+            'Product News': `
+                <article class="card">
+                    <a href="#" class="card-image-wrap">${wireImgPlaceholder}</a>
+                    <span class="text-label">Product News</span>
+                    <h3 class="card-title"><a href="#">Meet Zia: Zenfolio's AI Assistant for Photographers</a></h3>
+                    <div class="article-meta"><span>Apr 27th, 2026</span><span>•</span><span>4 min read</span></div>
+                </article>
+                <article class="card">
+                    <a href="#" class="card-image-wrap">${wireImgPlaceholder}</a>
+                    <span class="text-label">Product News</span>
+                    <h3 class="card-title"><a href="#">New Client Gallery Themes Just Added</a></h3>
+                    <div class="article-meta"><span>Mar 18th, 2026</span><span>•</span><span>3 min read</span></div>
+                </article>
+            `,
+            'Community': `
+                <article class="card">
+                    <a href="#" class="card-image-wrap">
+                        <div class="type-badge"><i data-lucide="user"></i> Photographer Profile</div>
+                        <div class="wire-img"><i data-lucide="user-square" style="width: 32px; height: 32px; opacity: 0.5;"></i></div>
+                    </a>
+                    <span class="text-label">Community</span>
+                    <h3 class="card-title"><a href="#">Wrangling the Wilds: How Jane Doe Captures Landscapes</a></h3>
+                    <div class="article-meta"><span>Mar 20th, 2026</span><span>•</span><span>6 min read</span></div>
+                </article>
+            `
+        };
+
+        // Category Filter Logic
+        const categoryPills = document.querySelectorAll('.cat-pill');
+        const articlesGrid = document.getElementById('latest-articles-grid');
+        const heroSection = document.getElementById('hero-section');
+
+        categoryPills.forEach(pill => {
+            pill.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                // Update active state
+                categoryPills.forEach(p => p.classList.remove('active'));
+                this.classList.add('active');
+
+                // Get category
+                const category = this.innerText.trim();
+
+                // Hide hero section unless 'All' is selected
+                if (category === 'All') {
+                    heroSection.style.display = 'block';
+                } else {
+                    heroSection.style.display = 'none';
+                }
+
+                // Start loading animation
+                articlesGrid.classList.add('grid-loading');
+
+                // Simulate network request
+                setTimeout(() => {
+                    // Update content
+                    articlesGrid.innerHTML = mockData[category] || '<p style="grid-column: 1/-1; text-align: center; color: var(--zf-gray);">No articles found for this category.</p>';
+                    
+                    // Re-initialize icons for newly added HTML
+                    lucide.createIcons();
+                    
+                    // Remove loading animation
+                    articlesGrid.classList.remove('grid-loading');
+                }, 400); // 400ms simulated delay
+            });
+        });
+
+        // Simple mock interaction for the "Load More" button
+        const loadMoreBtn = document.getElementById('loadMoreBtn');
+        loadMoreBtn.addEventListener('click', function() {
+            const originalText = this.innerText;
+            this.innerText = 'Loading...';
+            this.style.opacity = '0.7';
+            
+            // Simulate network request
+            setTimeout(() => {
+                this.innerText = 'All Caught Up!';
+                this.style.pointerEvents = 'none';
+                this.style.borderColor = 'transparent';
+                this.style.backgroundColor = 'var(--zf-off-white)';
+            }, 800);
+        });
+    </script>
+</body>
+</html>
